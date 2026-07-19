@@ -1,0 +1,32 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Backend
+**/bin/
+**/obj/
+**/*.user
+**/*.suo
+**/*.userosscache
+**/*.sln.docstates
+
+# Frontend
+**/node_modules/
+**/dist/
+**/.vite/
+**/.expo/
+**/.expo-shared/
+**/.turbo/
+**/.next/
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/

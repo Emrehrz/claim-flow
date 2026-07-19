@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AF84E531-8922-485A-BB12-D379BC3F6277}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClaimFlow.Domain", "src\ClaimFlow.Domain\ClaimFlow.Domain.csproj", "{893885F2-038D-41F2-9FCC-8026F3497B22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClaimFlow.Application", "src\ClaimFlow.Application\ClaimFlow.Application.csproj", "{E826BCEE-A592-4917-9BE1-6A103D6585E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClaimFlow.Infrastructure", "src\ClaimFlow.Infrastructure\ClaimFlow.Infrastructure.csproj", "{6E1A706B-0F05-4DC1-9075-9F9AF4029204}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClaimFlow.API", "src\ClaimFlow.API\ClaimFlow.API.csproj", "{965B7BD4-E357-4A23-BECE-364BDA96B2F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{893885F2-038D-41F2-9FCC-8026F3497B22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{893885F2-038D-41F2-9FCC-8026F3497B22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{893885F2-038D-41F2-9FCC-8026F3497B22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{893885F2-038D-41F2-9FCC-8026F3497B22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E826BCEE-A592-4917-9BE1-6A103D6585E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E826BCEE-A592-4917-9BE1-6A103D6585E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E826BCEE-A592-4917-9BE1-6A103D6585E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E826BCEE-A592-4917-9BE1-6A103D6585E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E1A706B-0F05-4DC1-9075-9F9AF4029204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E1A706B-0F05-4DC1-9075-9F9AF4029204}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E1A706B-0F05-4DC1-9075-9F9AF4029204}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E1A706B-0F05-4DC1-9075-9F9AF4029204}.Release|Any CPU.Build.0 = Release|Any CPU
+		{965B7BD4-E357-4A23-BECE-364BDA96B2F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{965B7BD4-E357-4A23-BECE-364BDA96B2F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{965B7BD4-E357-4A23-BECE-364BDA96B2F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{965B7BD4-E357-4A23-BECE-364BDA96B2F5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{893885F2-038D-41F2-9FCC-8026F3497B22} = {AF84E531-8922-485A-BB12-D379BC3F6277}
+		{E826BCEE-A592-4917-9BE1-6A103D6585E9} = {AF84E531-8922-485A-BB12-D379BC3F6277}
+		{6E1A706B-0F05-4DC1-9075-9F9AF4029204} = {AF84E531-8922-485A-BB12-D379BC3F6277}
+		{965B7BD4-E357-4A23-BECE-364BDA96B2F5} = {AF84E531-8922-485A-BB12-D379BC3F6277}
+	EndGlobalSection
+EndGlobal
