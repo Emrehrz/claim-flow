@@ -20,7 +20,7 @@ This sprint exists to provide a stable technical base for the claim management p
 - Docker and Docker Compose setup
 - Shared dependency injection baseline
 - Initial dashboard and mobile app scaffolds
-- Basic environment configuration files
+ - Basic environment configuration files
 
 ## Implementation Order
 1. Create the solution and base project structure.

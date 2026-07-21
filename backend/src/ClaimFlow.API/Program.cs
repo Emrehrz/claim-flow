@@ -1,4 +1,7 @@
 using ClaimFlow.Infrastructure;
+using ClaimFlow.Application.Interfaces.Authentication;
+using ClaimFlow.Application.Services;
+using ClaimFlow.Infrastructure.Authentication;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +28,10 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
+
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(JwtSettings.SectionName));
+builder.Services.AddScoped<IJwtProvider, JwtProvider>();
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 var app = builder.Build();
 
