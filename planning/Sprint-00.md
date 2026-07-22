@@ -1,5 +1,7 @@
 # Sprint 00 — Proje Altyapısı (Project Foundation)
 
+**Durum (Status):** Tamamlandı
+
 ## Sprint Amacı
 Proje altyapısını, depo (repository) yapısını ve yerel geliştirme ortamını kurarak sonraki tüm modüllerin ürün tasarımını değiştirmeden adım adım uygulanabilmesini sağlamak.
 

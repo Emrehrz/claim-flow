@@ -1,5 +1,7 @@
 # Sprint 5: Hasar Fotoğrafları ve Yapay Zeka Entegrasyonu
 
+**Durum (Status):** Tamamlanmadı
+
 ## Sprint Amacı
 Müşterinin görsel kanıtları sisteme dahil edebilmesi ve Yapay Zekanın bu sürecin arkasında destek olarak konumlanmasıdır.
 

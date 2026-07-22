@@ -1,5 +1,7 @@
 using ClaimFlow.Application.Interfaces;
+using ClaimFlow.Application.Interfaces.Data;
 using ClaimFlow.Infrastructure.Data;
+using ClaimFlow.Infrastructure.Data.Repositories;
 using ClaimFlow.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +24,8 @@ public static class DependencyInjection
 
         services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
         services.AddScoped<IHealthService, HealthService>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IVehicleRepository, VehicleRepository>();
 
         return services;
     }

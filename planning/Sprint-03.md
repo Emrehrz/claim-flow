@@ -1,5 +1,7 @@
 # Sprint 3: Poliçe Yönetimi
 
+**Durum (Status):** Tamamlanmadı
+
 ## Sprint Amacı
 Müşterilere sunulan poliçelerin tanımlanması, kapsam detaylarının aktarılması ve geçerlilik takibidir.
 

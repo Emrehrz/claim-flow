@@ -1,5 +1,7 @@
 # Sprint 8: Finalization & Deployment
 
+**Durum (Status):** Tamamlanmadı
+
 ## 1. Objective
 Projede uçtan uca doğrulamaların yapılması, performans hatalarının giderilmesi, kodun C# / React standartları çerçevesinde temizlenmesi ve uygulamanın canlıya alınabilir paketinin (Deployment) sunulmasıdır.
 

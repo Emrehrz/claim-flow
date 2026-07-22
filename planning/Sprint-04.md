@@ -1,5 +1,7 @@
 # Sprint 4: Hasar Temeli ve Raporlama
 
+**Durum (Status):** Tamamlanmadı
+
 ## Sprint Amacı
 Hasar süreçlerinin uçtan uca yönetimi, kullanıcının ihbar bırakması ve Admin'in durum güncellemelerini takip etmesi.
 

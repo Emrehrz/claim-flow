@@ -1,5 +1,7 @@
 # Sprint 7: Dashboard Analiz ve Audit (Aktivite Logları)
 
+**Durum (Status):** Tamamlanmadı
+
 ## Sprint Amacı
 Sistemdeki hareketliliğin canlı takibi (Audit logs) ve yöneticilere genel bakış sağlayacak metrik panellerinin oluşturulmasıdır.
 

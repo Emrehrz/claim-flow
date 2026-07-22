@@ -1,5 +1,7 @@
 # Sprint 01 — Kimlik Doğrulama Modülü (Authentication Module)
 
+**Durum (Status):** Tamamlandı
+
 ## Sprint Amacı
 Platforma ve gelecekte korunan modüllere güvenli erişim için gereken kimlik doğrulama (authentication) temelini uygulamak.
 

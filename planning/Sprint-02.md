@@ -1,5 +1,7 @@
 # Sprint 02 — Müşteri ve Araç Modülü (Customer & Vehicle Module)
 
+**Durum (Status):** Tamamlandı
+
 ## Sprint Amacı
 Müşteri sahipliği ve araç kayıtlarının tutarlı bir şekilde yönetilebilmesi için müşteri ve araç temelini oluşturmak.
 

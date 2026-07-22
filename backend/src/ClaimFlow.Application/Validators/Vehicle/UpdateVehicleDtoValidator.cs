@@ -1,0 +1,22 @@
+using ClaimFlow.Application.DTOs.Vehicle;
+using FluentValidation;
+
+namespace ClaimFlow.Application.Validators.Vehicle;
+
+public class UpdateVehicleDtoValidator : AbstractValidator<UpdateVehicleDto>
+{
+    public UpdateVehicleDtoValidator()
+    {
+        RuleFor(x => x.Brand)
+            .NotEmpty().WithMessage("Brand is required.")
+            .MaximumLength(100).WithMessage("Brand must not exceed 100 characters.");
+
+        RuleFor(x => x.Model)
+            .NotEmpty().WithMessage("Model is required.")
+            .MaximumLength(100).WithMessage("Model must not exceed 100 characters.");
+
+        RuleFor(x => x.Year)
+            .GreaterThan(1900).WithMessage("Year must be valid.")
+            .LessThanOrEqualTo(DateTime.UtcNow.Year + 1).WithMessage("Year cannot be in the future.");
+    }
+}

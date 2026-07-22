@@ -1,5 +1,7 @@
 # Sprint 6: Poliçe Talepleri ve Dummy Teklifler
 
+**Durum (Status):** Tamamlanmadı
+
 ## Sprint Amacı
 Kullanıcıların mevcut poliçeleriyle ilgili değişiklik/güncelleme ve yenileme taleplerinin iletilmesi süreçlerinin kodlanması.
 
