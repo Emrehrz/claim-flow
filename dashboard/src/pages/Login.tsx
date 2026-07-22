@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import api from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import '../Login.css'
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -14,7 +15,6 @@ export default function Login() {
     try {
       const response = await api.post('/auth/login', { email, password });
       setToken(response.data.accessToken);
-      // Also store refresh token in local storage or secure cookie
       navigate('/');
     } catch (error) {
       alert('Login failed. Please check credentials.');
@@ -22,32 +22,48 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-white">Login to ClaimFlow</h2>
-        <form onSubmit={handleLogin} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+    <div className="login-container">
+      {/* Arka plan efekti */}
+      <div className="login-background-glow" />
+
+      <div className="login-card">
+        {/* Header / Logo Alanı */}
+        <div className="login-header">
+          <div className="login-logo">
+            <span className="login-logo-text">CF</span>
+          </div>
+          <h1 className="login-title">ClaimFlow&apos;a Hoş Geldiniz</h1>
+          <p className="login-subtitle">Hesabınıza erişmek için bilgilerinizi girin</p>
+        </div>
+
+        {/* Form */}
+        <form onSubmit={handleLogin} className="login-form">
+          <div className="form-group">
+            <label className="form-label">E-posta</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 mt-1 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-700 dark:text-white"
+              placeholder="ornek@claimflow.com"
+              className="form-input"
               required
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+
+          <div className="form-group">
+            <label className="form-label">Şifre</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 mt-1 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-700 dark:text-white"
+              placeholder="••••••••"
+              className="form-input"
               required
             />
           </div>
-          <button type="submit" className="w-full px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">
-            Sign In
+
+          <button type="submit" className="submit-btn">
+            Giriş Yap
           </button>
         </form>
       </div>
