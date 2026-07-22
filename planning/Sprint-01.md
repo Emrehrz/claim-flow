@@ -1,57 +1,57 @@
-# Sprint 01 — Authentication Module
+# Sprint 01 — Kimlik Doğrulama Modülü (Authentication Module)
 
-## Sprint Goal
-Implement the authentication foundation needed for secure access to the platform and future protected modules.
+## Sprint Amacı
+Platforma ve gelecekte korunan modüllere güvenli erişim için gereken kimlik doğrulama (authentication) temelini uygulamak.
 
-## Business Context
-Authentication is the entry point for all customer and admin interactions. The system needs a reliable login flow and token-based access control before any business module can be exposed.
+## İş Bağlamı
+Kimlik doğrulama, tüm müşteri ve yönetici (admin) etkileşimlerinin giriş noktasıdır. Sistem, herhangi bir iş modülü dışa açılmadan önce güvenilir bir giriş (login) akışına ve token tabanlı erişim kontrolüne ihtiyaç duyar.
 
-## Scope
-- User authentication and token issuance.
-- Access token and refresh token support.
-- Role-aware access control for Admin and Customer users.
-- Backend login endpoint and protected route support for client applications.
+## Kapsam
+- Kullanıcı doğrulaması (User authentication) ve token oluşturma.
+- Access token ve refresh token desteği.
+- Admin ve Müşteri (Customer) kullanıcılar için rol tabanlı erişim kontrolü.
+- İstemci uygulamaları (client applications) için backend login endpoint'i ve korumalı rota (protected route) desteği.
 
-## Deliverables
-- User authentication domain support
-- Login request and response DTOs
-- JWT token service
-- Refresh token handling
-- Authentication controller
-- Authentication API endpoints
-- Validation rules for login input
-- Protected route integration for dashboard and mobile
-- Authentication unit tests
+## Çıktılar
+- Kullanıcı kimlik doğrulama domain desteği
+- Login istek (request) ve yanıt (response) DTO'ları
+- JWT token servisi
+- Refresh token işleme
+- Kimlik doğrulama (Authentication) controller'ı
+- Kimlik doğrulama API endpoint'leri
+- Login girişleri için validasyon kuralları
+- Dashboard ve mobil için korumalı rota (protected route) entegrasyonu
+- Kimlik doğrulama unit testleri
 
-## Implementation Order
-1. Define authentication contracts and DTOs.
-2. Implement user credential verification.
-3. Add JWT and refresh token generation.
-4. Expose login and refresh endpoints.
-5. Add request validation and authorization wiring.
-6. Integrate protected route handling in clients.
-7. Add unit tests for login and token flows.
+## Uygulama Sırası
+1. Kimlik doğrulama (authentication) kontratlarını ve DTO'larını tanımla.
+2. Kullanıcı kimlik bilgisi (credential) doğrulaması ekle.
+3. JWT ve refresh token oluşturma özelliklerini ekle.
+4. Login ve refresh endpoint'lerini dışa aç.
+5. İstek (request) validasyonu ve yetkilendirme (authorization) bağlantılarını ekle.
+6. İstemcilerdeki korumalı rota (protected route) işlemlerini entegre et.
+7. Login ve token akışları için unit testler ekle.
 
-## Acceptance Criteria
-- Valid credentials return a JWT-based authenticated response.
-- Invalid credentials return a standard unauthorized response.
-- Protected endpoints reject unauthenticated requests.
-- Client applications can store and use the issued token for authenticated navigation.
-- Authentication behavior remains aligned with the documented API contract.
+## Kabul Kriterleri
+- Geçerli kimlik bilgileri, JWT tabanlı kimliği doğrulanmış bir yanıt döndürür.
+- Geçersiz kimlik bilgileri, standart bir yetkisiz (unauthorized) yanıt döndürür.
+- Korumalı endpoint'ler, kimliği doğrulanmamış (unauthenticated) istekleri reddeder.
+- İstemci uygulamaları, yayınlanan token'ı saklayabilir ve kimliği doğrulanmış gezinme (navigation) için kullanabilir.
+- Kimlik doğrulama davranışı, belgelenen API kontratıyla uyumlu kalır.
 
-## Out of Scope
-- Register flow.
-- Password reset or email verification.
-- Customer, vehicle, policy, claim, or request features.
-- Dashboard analytics or activity logging.
+## Kapsam Dışı
+- Kayıt olma (Register) akışı.
+- Şifre sıfırlama (Password reset) veya e-posta doğrulama.
+- Müşteri, araç, poliçe, hasar veya talep (request) özellikleri.
+- Dashboard analitiği veya aktivite loglama.
 
-## Related Documentation
+## İlgili Dokümantasyon
 - docs/01-project-overview.md
 - docs/03-business-rules.md
 - docs/05-api-spec.md
 - docs/08-system-architecture.md
 - docs/09-development-roadmap.md
 
-## Suggestions
-- Keep authentication routes and token handling separate from business module controllers.
-- If a later sprint needs additional role claims, add them without changing the login contract.
+## Öneriler
+- Kimlik doğrulama rotalarını ve token işlemlerini iş modülü controller'larından ayrı tutun.
+- Daha sonraki bir sprint'in ek rol iddialarına (role claims) ihtiyacı olursa, bunları login kontratını değiştirmeden ekleyin.
