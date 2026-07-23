@@ -1,4 +1,4 @@
-using ClaimFlow.Application.Interfaces;
+  using ClaimFlow.Application.Interfaces;
 using ClaimFlow.Infrastructure;
 using ClaimFlow.Application.Interfaces.Authentication;
 using ClaimFlow.Application.Services;
@@ -35,6 +35,9 @@ builder.Services.AddScoped<IJwtProvider, JwtProvider>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IVehicleService, VehicleService>();
+builder.Services.AddScoped<IPolicyService, PolicyService>();
+
+builder.Services.AddScoped<IPolicyRepository, PolicyRepository>();
 
 var app = builder.Build();
 

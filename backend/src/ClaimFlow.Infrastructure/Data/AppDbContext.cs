@@ -10,6 +10,8 @@ public sealed class AppDbContext : DbContext
     {
     }
 
+    public DbSet<Policy> Policies  {get; set;}
+
     public DbSet<User> Users => Set<User>();
     public DbSet<Vehicle> Vehicles => Set<Vehicle>();
 

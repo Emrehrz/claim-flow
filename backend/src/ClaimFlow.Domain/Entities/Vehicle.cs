@@ -10,4 +10,6 @@ public class Vehicle
     
     public Guid UserId { get; set; }
     public User? User { get; set; }
+
+    public virtual ICollection<Policy> Policies { get; set; } = new List<Policy>();
 }
