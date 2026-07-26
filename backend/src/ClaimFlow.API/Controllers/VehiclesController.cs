@@ -30,7 +30,7 @@ public class VehiclesController : ControllerBase
             return Ok(vehicle);
         }
         catch (KeyNotFoundException ex) { return NotFound(new { message = ex.Message }); }
-        catch (UnauthorizedAccessException ex) { return Forbid(); }
+        catch (UnauthorizedAccessException) { return Forbid(); }
     }
 
     [HttpGet("user/{userId:guid}")]
@@ -67,7 +67,7 @@ public class VehiclesController : ControllerBase
             return Ok(vehicle);
         }
         catch (KeyNotFoundException ex) { return NotFound(new { message = ex.Message }); }
-        catch (UnauthorizedAccessException ex) { return Forbid(); }
+        catch (UnauthorizedAccessException) { return Forbid(); }
     }
 
     [HttpDelete("{id:guid}")]
@@ -79,6 +79,6 @@ public class VehiclesController : ControllerBase
             return NoContent();
         }
         catch (KeyNotFoundException ex) { return NotFound(new { message = ex.Message }); }
-        catch (UnauthorizedAccessException ex) { return Forbid(); }
+        catch (UnauthorizedAccessException) { return Forbid(); }
     }
 }

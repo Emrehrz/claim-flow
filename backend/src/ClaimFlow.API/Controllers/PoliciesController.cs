@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using ClaimFlow.Application.Interfaces;
-using ClaimFlow.Application.DTOs;
+using ClaimFlow.Application.DTOs.Policy;
 using ClaimFlow.Domain.Enums;
 using System.Security.Claims;
 
