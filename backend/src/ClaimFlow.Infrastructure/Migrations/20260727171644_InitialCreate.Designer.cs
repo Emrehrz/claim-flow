@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ClaimFlow.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260723103846_AddPolicyEntity")]
-    partial class AddPolicyEntity
+    [Migration("20260727171644_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,36 @@ namespace ClaimFlow.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("ClaimFlow.Domain.Entities.Claim", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("PolicyId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PolicyId");
+
+                    b.ToTable("Claims");
+                });
 
             modelBuilder.Entity("ClaimFlow.Domain.Entities.Policy", b =>
                 {
@@ -134,6 +164,17 @@ namespace ClaimFlow.Infrastructure.Migrations
                     b.ToTable("Vehicles");
                 });
 
+            modelBuilder.Entity("ClaimFlow.Domain.Entities.Claim", b =>
+                {
+                    b.HasOne("ClaimFlow.Domain.Entities.Policy", "Policy")
+                        .WithMany("Claims")
+                        .HasForeignKey("PolicyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Policy");
+                });
+
             modelBuilder.Entity("ClaimFlow.Domain.Entities.Policy", b =>
                 {
                     b.HasOne("ClaimFlow.Domain.Entities.Vehicle", "Vehicle")
@@ -154,6 +195,11 @@ namespace ClaimFlow.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ClaimFlow.Domain.Entities.Policy", b =>
+                {
+                    b.Navigation("Claims");
                 });
 
             modelBuilder.Entity("ClaimFlow.Domain.Entities.User", b =>

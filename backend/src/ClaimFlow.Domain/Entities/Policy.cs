@@ -19,4 +19,6 @@ public class Policy
 
         // Navigation Property
         public virtual Vehicle? Vehicle { get; set; }
+
+        public ICollection<Claim> Claims { get; set; } = new List<Claim>();
 }

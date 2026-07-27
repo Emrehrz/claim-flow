@@ -22,6 +22,36 @@ namespace ClaimFlow.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("ClaimFlow.Domain.Entities.Claim", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("PolicyId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PolicyId");
+
+                    b.ToTable("Claims");
+                });
+
             modelBuilder.Entity("ClaimFlow.Domain.Entities.Policy", b =>
                 {
                     b.Property<Guid>("Id")
@@ -131,6 +161,17 @@ namespace ClaimFlow.Infrastructure.Migrations
                     b.ToTable("Vehicles");
                 });
 
+            modelBuilder.Entity("ClaimFlow.Domain.Entities.Claim", b =>
+                {
+                    b.HasOne("ClaimFlow.Domain.Entities.Policy", "Policy")
+                        .WithMany("Claims")
+                        .HasForeignKey("PolicyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Policy");
+                });
+
             modelBuilder.Entity("ClaimFlow.Domain.Entities.Policy", b =>
                 {
                     b.HasOne("ClaimFlow.Domain.Entities.Vehicle", "Vehicle")
@@ -151,6 +192,11 @@ namespace ClaimFlow.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ClaimFlow.Domain.Entities.Policy", b =>
+                {
+                    b.Navigation("Claims");
                 });
 
             modelBuilder.Entity("ClaimFlow.Domain.Entities.User", b =>

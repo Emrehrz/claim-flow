@@ -1,5 +1,9 @@
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using ClaimFlow.Application.DTOs.Authentication;
 using ClaimFlow.Application.Interfaces.Authentication;
+using ClaimFlow.Application.Interfaces.Data;
 using ClaimFlow.Domain.Entities;
 
 namespace ClaimFlow.Application.Services;
@@ -7,46 +11,41 @@ namespace ClaimFlow.Application.Services;
 public class AuthenticationService : IAuthenticationService
 {
     private readonly IJwtProvider _jwtProvider;
+    private readonly IUserRepository _userRepository;
 
-    public AuthenticationService(IJwtProvider jwtProvider)
+    // _jwtProvider parametresinin yanına _userRepository eklendi
+    public AuthenticationService(IJwtProvider jwtProvider, IUserRepository userRepository)
     {
         _jwtProvider = jwtProvider;
+        _userRepository = userRepository;
     }
 
     public async Task<LoginResponse> LoginAsync(LoginRequest request, CancellationToken cancellationToken = default)
     {
-        // TODO: In a real implementation, we would query the database to find the user
-        // and verify the password hash. For Sprint 01 we simulate this.
+        // 1. Veritabanından kullanıcıyı e-posta ile bul
+        var user = await _userRepository.GetByEmailAsync(request.Email);
         
-        // Simulating user lookup
-        if (request.Email != "admin@claimflow.com" && request.Email != "customer@claimflow.com")
+        if (user == null)
         {
-            throw new Exception("Invalid credentials");
+            throw new UnauthorizedAccessException("Geçersiz kullanıcı adı veya şifre.");
         }
 
-        var user = new User 
-        { 
-            Id = Guid.NewGuid(), 
-            Email = request.Email, 
-            Role = request.Email.Contains("admin") ? "Admin" : "Customer" 
-        };
-
-        // Simulating password check
-        if (request.Password != "Password123!")
+        // 2. Şifre Doğrulaması (Eğer veritabanında PasswordHash tutuyorsan, hash karşılaştırması yapılmalı)
+        // Mevcut User entity'sinde şifreyi nasıl tuttuğuna göre bu satırı uyarla.
+        if (user.PasswordHash != request.Password)
         {
-            throw new Exception("Invalid credentials");
+            throw new UnauthorizedAccessException("Geçersiz kullanıcı adı veya şifre.");
         }
 
+        // 3. Token Üretimi
         var token = _jwtProvider.GenerateToken(user);
         var refreshToken = _jwtProvider.GenerateRefreshToken();
 
-        // Normally we'd fetch ExpiryMinutes from config or constants
         return new LoginResponse(token, refreshToken, 3600);
     }
 
     public Task<LoginResponse> RefreshTokenAsync(string refreshToken, CancellationToken cancellationToken = default)
     {
-        // TODO: Implement refresh token validation from DB and issue new token
         throw new NotImplementedException();
     }
 }
