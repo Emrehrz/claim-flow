@@ -12,4 +12,5 @@ public interface IClaimService
     Task<IEnumerable<ClaimDto>> GetClaimsByPolicyAsync(Guid userId, string role, Guid policyId);
     Task UpdateClaimStatusAsync(Guid claimId, UpdateClaimStatusDto dto);
     Task<ClaimDto> UploadClaimPhotoAsync(Guid claimId, Stream fileStream, string fileName, Guid currentUserId, string role, CancellationToken cancellationToken = default);
+    Task<ClaimDto?> GetClaimByIdAsync(Guid claimId, Guid userId, string role, CancellationToken cancellationToken = default);
 }

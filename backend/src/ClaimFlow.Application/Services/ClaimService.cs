@@ -128,4 +128,19 @@ public async Task<ClaimDto> UploadClaimPhotoAsync(Guid claimId, Stream fileStrea
 
         return claim.Adapt<ClaimDto>();
     }
+
+    public async Task<ClaimDto?> GetClaimByIdAsync(Guid claimId, Guid userId, string role, CancellationToken cancellationToken = default)
+{
+    var claim = await _claimRepository.GetClaimWithVehicleDetailsAsync(claimId, cancellationToken);
+
+    if (claim == null) return null;
+
+    // Yetki Kontrolü: Admin değilse ve poliçe müşteriye ait değilse erişimi engelle
+    if (role != "Admin" && claim.Policy?.Vehicle?.UserId != userId)
+    {
+        throw new UnauthorizedAccessException("Bu hasar dosyasını görüntüleme yetkiniz yok.");
+    }
+
+    return claim.Adapt<ClaimDto>();
+}
 }

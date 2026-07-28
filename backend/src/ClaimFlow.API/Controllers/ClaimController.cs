@@ -106,4 +106,19 @@ public async Task<IActionResult> UploadPhoto(Guid id, IFormFile file, Cancellati
 
     return Ok(result);
 }
+
+[HttpGet("{id}")]
+public async Task<IActionResult> GetClaimById(Guid id, CancellationToken cancellationToken)
+{
+    // Token'dan istek atan kullanıcının bilgilerini alıyoruz
+    var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
+    var role = User.FindFirst(ClaimTypes.Role)?.Value!;
+
+    var claim = await _claimService.GetClaimByIdAsync(id, userId, role, cancellationToken);
+    
+    if (claim == null)
+        return NotFound(new { message = "Hasar dosyası bulunamadı." });
+
+    return Ok(claim);
+}
 }
