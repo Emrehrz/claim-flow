@@ -3,6 +3,7 @@ using ClaimFlow.Application.DTOs.Claim;
 using ClaimFlow.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace ClaimFlow.API.Controllers;
 
@@ -74,4 +75,35 @@ public class ClaimsController : ControllerBase
             return NotFound(new { message = ex.Message });
         }
     }
+
+[HttpPost("{id}/photos")]
+// Rol yetkilendirmesi kullanıyorsan [Authorize] niteliklerini mevcut yapıya göre ayarla
+public async Task<IActionResult> UploadPhoto(Guid id, IFormFile file, CancellationToken cancellationToken)
+{
+    if (file == null || file.Length == 0)
+        return BadRequest("Lütfen geçerli bir dosya yükleyin.");
+
+// "id" yerine standart NameIdentifier veya doğrudan "sub" claim'ini arıyoruz
+    var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier)?.Value 
+                   ?? User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+    
+    // Rol claim'ini de güvenceye alalım
+    var roleClaim = User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role)?.Value 
+                 ?? User.Claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")?.Value;
+                 
+    if (!Guid.TryParse(userIdClaim, out Guid currentUserId))
+        return Unauthorized();
+
+    using var stream = file.OpenReadStream();
+    
+    var result = await _claimService.UploadClaimPhotoAsync(
+        id, 
+        stream, 
+        file.FileName, 
+        currentUserId, 
+        roleClaim ?? "Customer", 
+        cancellationToken);
+
+    return Ok(result);
+}
 }

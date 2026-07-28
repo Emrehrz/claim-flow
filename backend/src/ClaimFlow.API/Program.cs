@@ -5,6 +5,10 @@ using ClaimFlow.Application.Interfaces.Data;
 using ClaimFlow.Infrastructure.Data.Repositories;
 using ClaimFlow.Application.Services;
 using ClaimFlow.Infrastructure.Authentication;
+using ClaimFlow.Application.Interfaces.Storage;
+using ClaimFlow.Application.Interfaces.Ai;
+using ClaimFlow.Infrastructure.Services.Storage;
+using ClaimFlow.Infrastructure.Services.Ai;
 using Serilog;
 using Microsoft.OpenApi.Models; 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -25,18 +29,17 @@ builder.Services.AddControllers();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        // appsettings.json içindeki JWT ayarlarını buraya bağlamalısın
-        var jwtSettings = builder.Configuration.GetSection("JwtSettings");
         options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = jwtSettings["Issuer"],
-            ValidAudience = jwtSettings["Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Secret"]!))
-        };
+          {
+              ValidateIssuer = true,
+              ValidateAudience = true,
+              ValidateLifetime = true,
+              ValidateIssuerSigningKey = true,
+              ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+              ValidAudience = builder.Configuration["JwtSettings:Audience"],
+              IssuerSigningKey = new SymmetricSecurityKey(
+                  Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Secret"] ?? throw new InvalidOperationException("JWT Secret not found")))
+          };
     });
 
 builder.Services.AddAuthorization();
@@ -96,6 +99,8 @@ builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IVehicleService, VehicleService>();
 builder.Services.AddScoped<IPolicyService, PolicyService>();
 builder.Services.AddScoped<IClaimService, ClaimService>();
+builder.Services.AddScoped<ILocalStorageService, LocalStorageService>();
+builder.Services.AddScoped<IAiService, MockAiService>();
 
 builder.Services.AddScoped<IPolicyRepository, PolicyRepository>();
 builder.Services.AddScoped<IClaimRepository, ClaimRepository>();
@@ -113,6 +118,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors("AllowLocalClients");
+
+app.UseStaticFiles(); // Bu satır wwwroot klasörünü dışarıya açar
+
+app.UseRouting();
 
 // KİMLİK DOĞRULAMA VE YETKİLENDİRME SIRASI ÖNEMLİDİR:
 app.UseAuthentication();

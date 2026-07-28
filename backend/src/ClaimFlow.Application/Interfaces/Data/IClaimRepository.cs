@@ -13,4 +13,6 @@ public interface IClaimRepository
   Task<IEnumerable<Claim>> GetClaimsByPolicyIdAsync(Guid policyId);
   Task AddAsync(Claim claim);
   Task UpdateAsync(Claim claim);
+
+  Task<Claim> GetClaimWithVehicleDetailsAsync(Guid id, CancellationToken cancellationToken = default);
 }

@@ -60,6 +60,25 @@ public class ClaimRepository : IClaimRepository
     public async Task UpdateAsync(Claim claim)
     {
         _context.Claims.Update(claim);
+        
+        // Yeni eklenen fotoğrafların her birinin durumunu Explicit olarak Added yapıyoruz
+        foreach (var photo in claim.Photos)
+        {
+            if (_context.Entry(photo).State == EntityState.Detached)
+            {
+                _context.Entry(photo).State = EntityState.Added;
+            }
+        }
+
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<Claim> GetClaimWithVehicleDetailsAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        return await _context.Claims
+            .Include(c => c.Photos) // FOTOĞRAFLARI SİSTEME TANITIYORUZ
+            .Include(c => c.Policy)
+                .ThenInclude(p => p.Vehicle)
+            .FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
     }
 }
