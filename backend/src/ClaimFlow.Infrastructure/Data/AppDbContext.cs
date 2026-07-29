@@ -16,6 +16,7 @@ public sealed class AppDbContext : DbContext
     public DbSet<Vehicle> Vehicles => Set<Vehicle>();
     public DbSet<Claim> Claims { get; set; }
     public DbSet<ClaimPhoto> ClaimPhotos { get; set; }
+    public DbSet<PolicyRequest> PolicyRequests { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

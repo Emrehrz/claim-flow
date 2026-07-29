@@ -11,10 +11,10 @@ public class Claim
     public Guid PolicyId { get; set; }
     
     // Navigation Property
-    public Policy Policy { get; set; }
+    public Policy? Policy { get; set; }
     
-    public string Title { get; set; }
-    public string Description { get; set; }
+    public string Title { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
     public ClaimStatus Status { get; set; }
     public DateTime CreatedAt { get; set; }
 

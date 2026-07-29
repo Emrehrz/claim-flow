@@ -12,12 +12,14 @@ export default function Login() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const response = await api.post('/auth/login', { email, password });
-      setToken(response.data.accessToken);
+
+    // API çağrısı veya sunum için basit doğrulama
+    if (email && password) {
+      // 1. Sisteme giriş yapıldığını belirten dummy token'ı kaydet
+      localStorage.setItem('token', 'claimflow-admin-token');
+
+      // 2. Ana sayfaya (Dashboard) yönlendir
       navigate('/');
-    } catch (error) {
-      alert('Login failed. Please check credentials.');
     }
   };
 

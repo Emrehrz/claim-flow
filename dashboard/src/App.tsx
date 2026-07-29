@@ -1,20 +1,19 @@
-import { Routes, Route } from 'react-router-dom'
-import { HomePage } from './pages/HomePage'
-import Login from './pages/Login'
-import { ProtectedRoute } from './components/ProtectedRoute'
-import { ClaimDetailPage } from './pages/ClaimDetailPage'
-import './App.css'
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { AdminDashboard } from './pages/AdminDashboard';
+import Login from './pages/Login';
+import './App.css';
 
-function App() {
+export default function App() {
+  // localStorage'da 'token' adında bir kayıt varsa true döner
+  const isAuthenticated = !!localStorage.getItem('token');
+
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
-      <Route element={<ProtectedRoute />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/claim/:id" element={<ClaimDetailPage />} />
-      </Route>
+      <Route
+        path="/"
+        element={isAuthenticated ? <AdminDashboard /> : <Navigate to="/login" replace />}
+      />
     </Routes>
-  )
+  );
 }
-
-export default App

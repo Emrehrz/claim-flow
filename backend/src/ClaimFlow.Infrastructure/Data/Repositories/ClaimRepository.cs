@@ -76,9 +76,9 @@ public class ClaimRepository : IClaimRepository
     public async Task<Claim> GetClaimWithVehicleDetailsAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return await _context.Claims
-            .Include(c => c.Photos) // FOTOĞRAFLARI SİSTEME TANITIYORUZ
-            .Include(c => c.Policy)
-                .ThenInclude(p => p.Vehicle)
+            .Include(c => c!.Photos) // FOTOĞRAFLARI SİSTEME TANITIYORUZ
+            .Include(c => c!.Policy)
+                .ThenInclude(p => p!.Vehicle)
             .FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
     }
 }

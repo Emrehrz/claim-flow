@@ -14,6 +14,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using ClaimFlow.Infrastructure.Repositories; 
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -101,10 +102,12 @@ builder.Services.AddScoped<IPolicyService, PolicyService>();
 builder.Services.AddScoped<IClaimService, ClaimService>();
 builder.Services.AddScoped<ILocalStorageService, LocalStorageService>();
 builder.Services.AddScoped<IAiService, MockAiService>();
+builder.Services.AddScoped<IPolicyRequestService, PolicyRequestService>();
 
 builder.Services.AddScoped<IPolicyRepository, PolicyRepository>();
 builder.Services.AddScoped<IClaimRepository, ClaimRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IPolicyRequestRepository, PolicyRequestRepository>();
 
 var app = builder.Build();
 
